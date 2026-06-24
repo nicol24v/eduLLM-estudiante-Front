@@ -3,7 +3,6 @@ import { useNavigate, Navigate } from 'react-router-dom'
 import { Box, Card, CardContent, TextField, Button, Typography, Alert } from '@mui/material'
 import { useAuthStore } from '../../stores/useAuthStore'
 import { gameService } from '../../services/gameService'
-import { jwtDecode } from 'jwt-decode'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -20,13 +19,23 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      const { token: jwt } = await gameService.login(username, password)
-      const decoded = jwtDecode(jwt)
-      if (decoded.rol !== 'estudiante') {
+      const loginData = await gameService.login(username, password)
+
+      if (!loginData?.token) {
+        setError('No se pudo iniciar sesión.')
+        return
+      }
+
+      const rol = (loginData.rol || '').replace(/^ROLE_/, '').toLowerCase()
+      if (rol !== 'estudiante') {
         setError('Acceso solo para estudiantes.')
         return
       }
-      login(jwt, { id_usuario: Number(decoded.sub), rol: decoded.rol })
+
+      login(loginData.token, {
+        id_usuario: loginData.idUsuario,
+        rol: loginData.rol,
+      })
       navigate('/', { replace: true })
     } catch (err) {
       setError(err.response?.data?.message || 'Credenciales incorrectas')

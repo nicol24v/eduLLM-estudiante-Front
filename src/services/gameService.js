@@ -9,7 +9,14 @@ export const gameService = {
   },
 
   login: async (username, password) => {
-    const { data } = await api.post('/api/auth/login', { username, password })
+    const { data } = await api.post('/api/auth/login', { username, password }, {
+      withCredentials: true,
+    })
+    return data
+  },
+
+  verify: async () => {
+    const { data } = await api.get('/api/auth/verify', { withCredentials: true })
     return data
   },
 }

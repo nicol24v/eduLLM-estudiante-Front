@@ -7,7 +7,7 @@ import { useGameStore } from '../../../stores/useGameStore'
 
 export default function FinalResults() {
   const navigate = useNavigate()
-  const { score, myPosition, answerHistory, quizTitle, reset } = useGameStore()
+  const { score, myPosition, answerHistory, quizTitle, idPartidaEstudiante, reset } = useGameStore()
 
   const handleHome = () => {
     reset()
@@ -56,8 +56,8 @@ export default function FinalResults() {
       </Stack>
 
       <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
-        <Button variant="outlined" fullWidth disabled>
-          Hablar con tu tutor virtual (próximamente)
+        <Button variant="outlined" fullWidth onClick={() => window.location.href = `http://localhost:8085/tutor?idPartidaEstudiante=${idPartidaEstudiante}`}>
+          Hablar con tu tutor virtual
         </Button>
         <Button variant="contained" fullWidth onClick={handleHome}>
           Volver al inicio

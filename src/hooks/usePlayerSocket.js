@@ -22,6 +22,7 @@ export function usePlayerSocket(codigoAcceso) {
     if (!codigoAcceso || !token || !idEstudianteMateria) return
 
     const socket = io(import.meta.env.VITE_SOCKET_URL, {
+      path: '/game/socket.io',
       query: { role: 'player' },
       auth: { token },
       transports: ['websocket'],
@@ -59,8 +60,9 @@ export function usePlayerSocket(codigoAcceso) {
       setLeaderboard(leaderboard, String(idEstudianteMateria))
     })
 
-    socket.on('game:finished', ({ leaderboard }) => {
-      setFinished(leaderboard, String(idEstudianteMateria))
+    socket.on('game:finished', ({ leaderboard, idPartidaEstudianteMap }) => {
+      const idPartidaEstudiante = idPartidaEstudianteMap?.[String(idEstudianteMateria)] ?? null
+      setFinished(leaderboard, String(idEstudianteMateria), idPartidaEstudiante)
     })
 
     socket.on('game:kicked', () => {

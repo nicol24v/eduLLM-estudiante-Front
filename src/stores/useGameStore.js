@@ -11,9 +11,10 @@ export const useGameStore = create((set, get) => ({
   leaderboard: [],
   myPosition: null,
   answerHistory: [],
+  idPartidaEstudiante: null,
 
   initGame: (codigoAcceso, quizTitle, totalPreguntas) =>
-    set({ codigoAcceso, quizTitle, totalPreguntas, status: 'SHOW_ROOM' }),
+    set({ codigoAcceso, quizTitle, totalPreguntas, status: 'SHOW_ROOM', score: 0, answerHistory: [], myAnswer: null }),
 
   setQuestion: (questionData) =>
     set({ currentQuestion: questionData, myAnswer: null, status: 'SHOW_QUESTION' }),
@@ -54,9 +55,9 @@ export const useGameStore = create((set, get) => ({
     set({ status: 'SHOW_LEADERBOARD', leaderboard, myPosition: myEntry?.position ?? null })
   },
 
-  setFinished: (leaderboard, myPlayerId) => {
+  setFinished: (leaderboard, myPlayerId, idPartidaEstudiante) => {
     const myEntry = leaderboard.find((e) => String(e.playerId) === String(myPlayerId))
-    set({ status: 'FINISHED', leaderboard, myPosition: myEntry?.position ?? null })
+    set({ status: 'FINISHED', leaderboard, myPosition: myEntry?.position ?? null, idPartidaEstudiante })
   },
 
   setStatus: (status) => set({ status }),
@@ -64,6 +65,6 @@ export const useGameStore = create((set, get) => ({
   reset: () => set({
     status: null, codigoAcceso: null, quizTitle: null, totalPreguntas: null,
     currentQuestion: null, myAnswer: null, score: 0, leaderboard: [],
-    myPosition: null, answerHistory: [],
+    myPosition: null, answerHistory: [], idPartidaEstudiante: null,
   }),
 }))
