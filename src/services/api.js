@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { useAuthStore } from '../stores/useAuthStore'
 
+const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: GATEWAY,
 })
 
 api.interceptors.request.use((config) => {
@@ -16,7 +18,7 @@ api.interceptors.response.use(
   (err) => {
     if (err.response?.status === 401) {
       useAuthStore.getState().logout()
-      window.location.href = '/login'
+      window.location.href = `${GATEWAY}/login`
     }
     return Promise.reject(err)
   },

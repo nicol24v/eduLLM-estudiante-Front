@@ -1,81 +1,10 @@
-import { useState } from 'react'
-import { useNavigate, Navigate } from 'react-router-dom'
-import { Box, Card, CardContent, TextField, Button, Typography, Alert } from '@mui/material'
-import { useAuthStore } from '../../stores/useAuthStore'
-import { gameService } from '../../services/gameService'
+import { useEffect } from 'react'
+
+const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
 
 export default function LoginPage() {
-  const navigate = useNavigate()
-  const { token, login } = useAuthStore()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  if (token) return <Navigate to="/" replace />
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-    try {
-      const loginData = await gameService.login(username, password)
-
-      if (!loginData?.token) {
-        setError('No se pudo iniciar sesión.')
-        return
-      }
-
-      const rol = (loginData.rol || '').replace(/^ROLE_/, '').toLowerCase()
-      if (rol !== 'estudiante') {
-        setError('Acceso solo para estudiantes.')
-        return
-      }
-
-      login(loginData.token, {
-        id_usuario: loginData.idUsuario,
-        rol: loginData.rol,
-      })
-      navigate('/', { replace: true })
-    } catch (err) {
-      setError(err.response?.data?.message || 'Credenciales incorrectas')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#e3f2fd' }}>
-      <Card sx={{ width: 380, p: 2 }}>
-        <CardContent>
-          <Typography variant="h5" fontWeight={700} textAlign="center" mb={3} color="primary">
-            EduQuiz — Estudiante
-          </Typography>
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-          <form onSubmit={handleSubmit}>
-            <TextField
-              label="Usuario"
-              fullWidth
-              margin="normal"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <TextField
-              label="Contraseña"
-              type="password"
-              fullWidth
-              margin="normal"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }} disabled={loading}>
-              {loading ? 'Ingresando...' : 'Ingresar'}
-            </Button>
-          </form>
-        </CardContent>
-      </Card>
-    </Box>
-  )
+  useEffect(() => {
+    window.location.href = `${GATEWAY}/login`
+  }, [])
+  return null
 }
