@@ -9,5 +9,10 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
+    server: {
+      deps: {
+        inline: ['react-transition-group', '@mui/material', '@mui/icons-material', '@emotion/react', '@emotion/styled'],
+      },
+    },
   },
 })
