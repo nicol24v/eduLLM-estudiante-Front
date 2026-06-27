@@ -24,9 +24,9 @@ export default function Question() {
           {currentQuestion.texto}
         </Typography>
       </Paper>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} alignItems="stretch">
         {currentQuestion.opciones.map((op, i) => (
-          <Grid item xs={12} sm={6} key={op.id_opcion}>
+          <Grid item xs={6} key={op.id_opcion}>
             <AnswerButton index={i} label={op.texto} disabled />
           </Grid>
         ))}
