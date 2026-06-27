@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Paper } from '@mui/material'
+import { Box, Typography, Paper } from '@mui/material'
 import { useState } from 'react'
 import Timer from '../components/Timer'
 import QuestionMedia from '../components/QuestionMedia'
@@ -33,19 +33,18 @@ export default function Answers({ sendAnswer }) {
           {currentQuestion.texto}
         </Typography>
       </Paper>
-      <Grid container spacing={2} alignItems="stretch">
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}>
         {currentQuestion.opciones.map((op, i) => (
-          <Grid item xs={6} key={op.id_opcion}>
-            <AnswerButton
-              index={i}
-              label={op.texto}
-              disabled={selected !== null}
-              selected={selected === op.id_opcion}
-              onClick={() => handleSelect(op.id_opcion)}
-            />
-          </Grid>
+          <AnswerButton
+            key={op.id_opcion}
+            index={i}
+            label={op.texto}
+            disabled={selected !== null}
+            selected={selected === op.id_opcion}
+            onClick={() => handleSelect(op.id_opcion)}
+          />
         ))}
-      </Grid>
+      </Box>
     </Box>
   )
 }

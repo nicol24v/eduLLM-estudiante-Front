@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Paper } from '@mui/material'
+import { Box, Typography, Paper } from '@mui/material'
 import Timer from '../components/Timer'
 import QuestionMedia from '../components/QuestionMedia'
 import AnswerButton from '../components/AnswerButton'
@@ -24,13 +24,11 @@ export default function Question() {
           {currentQuestion.texto}
         </Typography>
       </Paper>
-      <Grid container spacing={2} alignItems="stretch">
+      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}>
         {currentQuestion.opciones.map((op, i) => (
-          <Grid item xs={6} key={op.id_opcion}>
-            <AnswerButton index={i} label={op.texto} disabled />
-          </Grid>
+          <AnswerButton key={op.id_opcion} index={i} label={op.texto} disabled />
         ))}
-      </Grid>
+      </Box>
       <Typography variant="body2" color="text.secondary" textAlign="center" mt={2}>
         Espera... las respuestas se habilitarán en un momento
       </Typography>
