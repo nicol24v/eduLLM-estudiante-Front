@@ -24,7 +24,7 @@ export default function Question() {
           {currentQuestion.texto}
         </Typography>
       </Paper>
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 2 }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 2 }}>
         {currentQuestion.opciones.map((op, i) => (
           <AnswerButton key={op.id_opcion} index={i} label={op.texto} disabled />
         ))}
