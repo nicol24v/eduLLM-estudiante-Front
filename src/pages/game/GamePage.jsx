@@ -1,3 +1,4 @@
+import fondoCuest from '../../assets/fondo-cuest.jpg'
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
@@ -52,6 +53,7 @@ export default function GamePage() {
 
   const bg = STATE_BG[status] || '#f5f5f5'
   const color = STATE_COLOR[status] || 'inherit'
+  const isQuestionState = status === 'SHOW_QUESTION' || status === 'SELECT_ANSWER'
 
   const renderState = () => {
     switch (status) {
@@ -77,7 +79,21 @@ export default function GamePage() {
   }
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: bg, color, transition: 'background-color 0.4s' }}>
+    <Box sx={{
+      minHeight: '100vh',
+      color,
+      fontFamily: "'Fredoka One', 'Nunito', cursive",
+      transition: 'background 0.4s',
+      ...(isQuestionState
+        ? {
+            background: `linear-gradient(rgba(10,10,30,0.60), rgba(10,10,30,0.60)), url(${fondoCuest})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }
+        : { bgcolor: bg }
+      ),
+    }}>
       <Container maxWidth="md" sx={{ py: 2 }}>
         {renderState()}
       </Container>
