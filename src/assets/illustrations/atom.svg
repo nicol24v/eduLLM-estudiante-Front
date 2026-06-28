@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Anillo orbital 1 (horizontal, verde) -->
+  <ellipse cx="100" cy="100" rx="90" ry="30" fill="none" stroke="#4CAF50" stroke-width="3.5"/>
+  <!-- Anillo orbital 2 (60°, rosa) -->
+  <ellipse cx="100" cy="100" rx="90" ry="30" fill="none" stroke="#E91E63" stroke-width="3.5" transform="rotate(60 100 100)"/>
+  <!-- Anillo orbital 3 (120°, azul) -->
+  <ellipse cx="100" cy="100" rx="90" ry="30" fill="none" stroke="#2196F3" stroke-width="3.5" transform="rotate(120 100 100)"/>
+
+  <!-- Halo del núcleo -->
+  <circle cx="100" cy="100" r="20" fill="#FFCDD2" opacity="0.5"/>
+  <!-- Núcleo -->
+  <circle cx="100" cy="100" r="14" fill="#F44336"/>
+  <!-- Brillo del núcleo -->
+  <circle cx="93" cy="94" r="5" fill="#FFCDD2" opacity="0.7"/>
+
+  <!-- Electrón 1 (derecha) -->
+  <circle cx="190" cy="100" r="7.5" fill="#FFC107"/>
+  <circle cx="187" cy="97" r="2.5" fill="white" opacity="0.6"/>
+  <!-- Electrón 2 (arriba izquierda) -->
+  <circle cx="55" cy="43" r="7.5" fill="#FFC107"/>
+  <circle cx="52" cy="40" r="2.5" fill="white" opacity="0.6"/>
+  <!-- Electrón 3 (abajo izquierda) -->
+  <circle cx="55" cy="157" r="7.5" fill="#FFC107"/>
+  <circle cx="52" cy="154" r="2.5" fill="white" opacity="0.6"/>
+</svg>

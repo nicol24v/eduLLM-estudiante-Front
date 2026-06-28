@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 220">
+  <!-- Hebra 1 (azul) -->
+  <path d="M60,10 C20,40 20,70 60,100 C100,130 100,160 60,190"
+        fill="none" stroke="#2196F3" stroke-width="4" stroke-linecap="round"/>
+  <!-- Hebra 2 (rosa, espejo) -->
+  <path d="M60,10 C100,40 100,70 60,100 C20,130 20,160 60,190"
+        fill="none" stroke="#E91E63" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Puentes de bases nitrogenadas -->
+  <line x1="38" y1="28" x2="82" y2="28" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="20" y1="55" x2="100" y2="55" stroke="#FF9800" stroke-width="3" stroke-linecap="round"/>
+  <line x1="38" y1="82" x2="82" y2="82" stroke="#9C27B0" stroke-width="3" stroke-linecap="round"/>
+  <line x1="38" y1="118" x2="82" y2="118" stroke="#FFC107" stroke-width="3" stroke-linecap="round"/>
+  <line x1="20" y1="145" x2="100" y2="145" stroke="#F44336" stroke-width="3" stroke-linecap="round"/>
+  <line x1="38" y1="172" x2="82" y2="172" stroke="#00BCD4" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Extremos -->
+  <circle cx="60" cy="10" r="5" fill="#673AB7"/>
+  <circle cx="60" cy="190" r="5" fill="#673AB7"/>
+</svg>

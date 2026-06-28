@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 140">
+  <defs>
+    <clipPath id="erl-clip">
+      <path d="M43,12 L43,55 L14,108 Q12,126 32,126 L78,126 Q98,126 96,108 L67,55 L67,12 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Cuerpo del frasco -->
+  <path d="M43,12 L43,55 L14,108 Q12,126 32,126 L78,126 Q98,126 96,108 L67,55 L67,12 Z" fill="#FFFDE7"/>
+
+  <!-- Líquido (amarillo-verde) -->
+  <g clip-path="url(#erl-clip)">
+    <rect x="0" y="78" width="110" height="60" fill="#C6EF3A"/>
+    <circle cx="38" cy="98" r="5" fill="white" opacity="0.4"/>
+    <circle cx="62" cy="106" r="3.5" fill="white" opacity="0.35"/>
+    <circle cx="50" cy="88" r="3" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Contorno -->
+  <path d="M43,12 L43,55 L14,108 Q12,126 32,126 L78,126 Q98,126 96,108 L67,55 L67,12 Z"
+        fill="none" stroke="#5D4037" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Boca del frasco -->
+  <line x1="36" y1="12" x2="74" y2="12" stroke="#5D4037" stroke-width="4" stroke-linecap="round"/>
+  <!-- Superficie del líquido -->
+  <line x1="16" y1="78" x2="94" y2="78" stroke="#9E9D24" stroke-width="2" opacity="0.5"/>
+</svg>

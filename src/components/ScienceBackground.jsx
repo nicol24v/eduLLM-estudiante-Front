@@ -56,28 +56,6 @@ export default function ScienceBackground() {
         <rect width="100%" height="100%" fill="url(#science-bg-pattern)" />
       </Box>
 
-      {/* Acento hoja — izquierda, oculta en mobile */}
-      <Box
-        component="svg"
-        viewBox="0 0 200 400"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        sx={{
-          position: 'absolute', left: -40, top: '50%', transform: 'translateY(-50%)',
-          width: { xs: 0, sm: 160, md: 200 },
-          height: { xs: 0, sm: 320, md: 400 },
-          opacity: 0.2,
-          display: { xs: 'none', sm: 'block' },
-        }}
-      >
-        <path d="M100 380 Q20 280 20 140 Q20 20 100 10 Q180 20 180 140 Q180 280 100 380Z" fill="white" />
-        <line x1="100" y1="380" x2="100" y2="10" stroke="rgba(255,255,255,0.5)" strokeWidth="2" />
-        <path d="M100 300 Q60 260 40 200" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="none" />
-        <path d="M100 300 Q140 260 160 200" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="none" />
-        <path d="M100 220 Q60 180 45 130" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="none" />
-        <path d="M100 220 Q140 180 155 130" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" fill="none" />
-      </Box>
-
       {/* Acento átomo — derecha, oculto en mobile */}
       <Box
         component="svg"

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <clipPath id="earth-clip">
+      <circle cx="100" cy="100" r="87"/>
+    </clipPath>
+  </defs>
+
+  <!-- Borde exterior -->
+  <circle cx="100" cy="100" r="90" fill="#1E3A5F"/>
+  <!-- Océano -->
+  <circle cx="100" cy="100" r="87" fill="#5BB8F5"/>
+
+  <!-- Continentes (recortados al círculo) -->
+  <g clip-path="url(#earth-clip)">
+    <!-- América del Norte -->
+    <path d="M35,38 Q50,22 72,34 Q92,48 88,76 Q80,98 60,100 Q38,98 30,76 Q26,54 35,38Z" fill="#72C85A"/>
+    <!-- América del Sur -->
+    <path d="M54,112 Q70,102 82,116 Q92,132 86,154 Q76,172 58,170 Q42,164 40,144 Q38,124 54,112Z" fill="#72C85A"/>
+    <!-- Europa -->
+    <path d="M104,28 Q118,18 132,30 Q144,44 136,62 Q126,74 110,72 Q96,66 96,50 Q96,36 104,28Z" fill="#72C85A"/>
+    <!-- África -->
+    <path d="M108,82 Q126,72 140,86 Q154,102 150,128 Q144,154 126,160 Q106,162 96,144 Q86,124 90,104 Q94,86 108,82Z" fill="#72C85A"/>
+    <!-- Asia -->
+    <path d="M128,22 Q160,10 176,28 Q188,46 180,66 Q168,82 148,80 Q128,76 118,58 Q112,40 128,22Z" fill="#72C85A"/>
+    <!-- Australia -->
+    <path d="M154,122 Q170,114 180,126 Q186,140 178,152 Q166,160 154,154 Q142,146 142,134 Q142,122 154,122Z" fill="#72C85A"/>
+  </g>
+
+  <!-- Cara kawaii -->
+  <!-- Ojo izquierdo -->
+  <circle cx="78" cy="106" r="12" fill="#1E3A5F"/>
+  <circle cx="74" cy="102" r="4.5" fill="white"/>
+  <!-- Ojo derecho -->
+  <circle cx="122" cy="106" r="12" fill="#1E3A5F"/>
+  <circle cx="118" cy="102" r="4.5" fill="white"/>
+  <!-- Sonrisa -->
+  <path d="M84,122 Q100,136 116,122" stroke="#1E3A5F" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Anillo exterior -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#1E3A5F" stroke-width="4"/>
+</svg>

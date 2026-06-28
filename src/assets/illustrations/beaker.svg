@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 140">
+  <defs>
+    <clipPath id="bkr-clip">
+      <path d="M22,12 L22,118 Q22,128 32,128 L78,128 Q88,128 88,118 L88,12 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Cuerpo del vaso -->
+  <path d="M22,12 L22,118 Q22,128 32,128 L78,128 Q88,128 88,118 L88,12 Z" fill="#FCE4EC"/>
+
+  <!-- Líquido (rosa) -->
+  <g clip-path="url(#bkr-clip)">
+    <rect x="0" y="68" width="110" height="70" fill="#E91E63" opacity="0.65"/>
+    <circle cx="42" cy="88" r="5.5" fill="white" opacity="0.4"/>
+    <circle cx="68" cy="96" r="4" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Contorno -->
+  <path d="M22,12 L22,118 Q22,128 32,128 L78,128 Q88,128 88,118 L88,12 Z"
+        fill="none" stroke="#880E4F" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Borde superior + pico -->
+  <line x1="15" y1="12" x2="88" y2="12" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M88,12 Q100,12 100,5" fill="none" stroke="#880E4F" stroke-width="4" stroke-linecap="round"/>
+  <!-- Graduaciones -->
+  <line x1="22" y1="48" x2="33" y2="48" stroke="#BDBDBD" stroke-width="2"/>
+  <line x1="22" y1="62" x2="33" y2="62" stroke="#BDBDBD" stroke-width="2"/>
+  <!-- Superficie del líquido -->
+  <line x1="24" y1="68" x2="86" y2="68" stroke="#C2185B" stroke-width="2" opacity="0.5"/>
+</svg>

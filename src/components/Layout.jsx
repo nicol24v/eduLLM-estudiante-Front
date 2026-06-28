@@ -23,6 +23,8 @@ export default function Layout({ children }) {
     logout()
     try {
       await axios.post(`${GATEWAY}/api/auth/logout`, {}, { withCredentials: true })
+    
+    // eslint-disable-next-line no-empty
     } catch {}
     window.location.href = `${GATEWAY}/login`
   }

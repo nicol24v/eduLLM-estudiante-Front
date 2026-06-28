@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 145">
+  <defs>
+    <clipPath id="rfl-clip">
+      <path d="M44,10 L44,50 Q12,62 10,92 Q10,136 55,136 Q100,136 100,92 Q98,62 66,50 L66,10 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Cuerpo del balón -->
+  <path d="M44,10 L44,50 Q12,62 10,92 Q10,136 55,136 Q100,136 100,92 Q98,62 66,50 L66,10 Z" fill="#E8F5E9"/>
+
+  <!-- Líquido (verde) -->
+  <g clip-path="url(#rfl-clip)">
+    <rect x="0" y="78" width="110" height="70" fill="#4CAF50" opacity="0.75"/>
+    <circle cx="44" cy="96" r="5" fill="white" opacity="0.4"/>
+    <circle cx="68" cy="104" r="3.5" fill="white" opacity="0.35"/>
+    <circle cx="56" cy="86" r="3" fill="white" opacity="0.35"/>
+  </g>
+
+  <!-- Contorno -->
+  <path d="M44,10 L44,50 Q12,62 10,92 Q10,136 55,136 Q100,136 100,92 Q98,62 66,50 L66,10 Z"
+        fill="none" stroke="#1B5E20" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Boca del frasco -->
+  <line x1="37" y1="10" x2="73" y2="10" stroke="#1B5E20" stroke-width="4" stroke-linecap="round"/>
+  <!-- Superficie del líquido -->
+  <line x1="16" y1="78" x2="94" y2="78" stroke="#2E7D32" stroke-width="2" opacity="0.5"/>
+</svg>
