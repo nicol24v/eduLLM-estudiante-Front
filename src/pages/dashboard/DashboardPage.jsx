@@ -3,13 +3,21 @@ import { useNavigate } from 'react-router-dom'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import axios from 'axios'
 import { useAuthStore } from '../../stores/useAuthStore'
-
-const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+import { gameService } from '../../services/gameService'
+import { GATEWAY } from '../../config'
+import RobotFrases from '../../components/RobotFrases'
 
 export default function DashboardPage() {
   const navigate = useNavigate()
   const login = useAuthStore((s) => s.login)
   const [error, setError] = useState(null)
+  const [frases, setFrases] = useState([])
+
+  useEffect(() => {
+    gameService.getFrases()
+      .then(setFrases)
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     axios
@@ -51,6 +59,7 @@ export default function DashboardPage() {
       <Typography variant="body2" sx={{ mt: 2, color: 'text.secondary' }}>
         Verificando sesión...
       </Typography>
+      <RobotFrases frases={frases} />
     </Box>
   )
 }
