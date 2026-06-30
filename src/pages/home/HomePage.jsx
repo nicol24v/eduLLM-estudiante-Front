@@ -21,7 +21,7 @@ export default function HomePage() {
 
   useEffect(() => {
     gameService.getFrases()
-      .then(setFrases)
+      .then((res) => setFrases(Array.isArray(res) ? res : (res?.frases ?? [])))
       .catch(() => {})
   }, [])
 
