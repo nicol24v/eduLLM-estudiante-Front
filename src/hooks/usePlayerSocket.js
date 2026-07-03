@@ -14,6 +14,7 @@ export function usePlayerSocket(codigoAcceso) {
   const {
     initGame, setQuestion, openAnswers,
     submitAnswer, setLeaderboard, setFinished, setStatus, reset,
+    addPlayer, removePlayer,
   } = useGameStore()
 
   const nickname = [nombre, apellidoPaterno].filter(Boolean).join(' ') || 'Estudiante'
@@ -21,11 +22,12 @@ export function usePlayerSocket(codigoAcceso) {
   useEffect(() => {
     if (!codigoAcceso || !token || !idEstudianteMateria) return
 
-    const socket = io(import.meta.env.VITE_SOCKET_URL, {
+    const socket = io(import.meta.env.VITE_SOCKET_URL || undefined, {
       path: '/game/socket.io',
       query: { role: 'player' },
       auth: { token },
-      transports: ['websocket'],
+      withCredentials: true,
+      transports: ['websocket', 'polling'],
     })
     socketRef.current = socket
 
@@ -39,9 +41,32 @@ export function usePlayerSocket(codigoAcceso) {
             navigate('/join', { replace: true })
             return
           }
-          initGame(codigoAcceso, res.data?.titulo ?? '', res.data?.totalPreguntas ?? 0)
+          initGame(codigoAcceso, res.data?.titulo ?? '', res.data?.totalPreguntas ?? 0, res.data?.players ?? [])
+
+          const { status, currentQuestion } = res.data || {}
+          if (status === 'SHOW_START') {
+            setStatus('SHOW_START')
+          } else if ((status === 'SHOW_QUESTION' || status === 'SELECT_ANSWER') && currentQuestion) {
+            const elapsedSec = Math.floor((currentQuestion.elapsedMs || 0) / 1000)
+            const question = {
+              ...currentQuestion,
+              tiempo_limite: Math.max(1, currentQuestion.tiempo_limite - elapsedSec),
+            }
+            setQuestion(question)
+            if (status === 'SELECT_ANSWER') {
+              openAnswers()
+            }
+          }
         },
       )
+    })
+
+    socket.on('game:player_joined', ({ playerId, nickname }) => {
+      addPlayer({ playerId, nickname })
+    })
+
+    socket.on('game:player_left', ({ playerId }) => {
+      removePlayer(playerId)
     })
 
     socket.on('game:started', () => {
@@ -54,6 +79,22 @@ export function usePlayerSocket(codigoAcceso) {
 
     socket.on('game:open_answers', () => {
       openAnswers()
+    })
+
+    socket.on('game:responses', () => {
+      const state = useGameStore.getState()
+      if (state.status === 'SELECT_ANSWER' || state.status === 'SHOW_QUESTION') {
+        useGameStore.setState({
+          status: 'POST_ANSWER',
+          myAnswer: {
+            opcionId: null,
+            isCorrect: false,
+            points: 0,
+            retroalimentacion: null,
+            correctOpcionId: null,
+          },
+        })
+      }
     })
 
     socket.on('game:leaderboard', ({ leaderboard }) => {

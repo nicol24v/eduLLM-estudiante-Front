@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import { useAuthStore } from '../../stores/useAuthStore'
-
-const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+import { GATEWAY } from '../../config'
 
 const decodeJwt = (token) => {
   try {

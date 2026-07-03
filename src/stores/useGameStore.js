@@ -13,8 +13,22 @@ export const useGameStore = create((set, get) => ({
   answerHistory: [],
   idPartidaEstudiante: null,
 
-  initGame: (codigoAcceso, quizTitle, totalPreguntas) =>
-    set({ codigoAcceso, quizTitle, totalPreguntas, status: 'SHOW_ROOM', score: 0, answerHistory: [], myAnswer: null }),
+  initGame: (codigoAcceso, quizTitle, totalPreguntas, players = []) =>
+    set({ codigoAcceso, quizTitle, totalPreguntas, status: 'SHOW_ROOM', leaderboard: players, score: 0, answerHistory: [], myAnswer: null }),
+
+  addPlayer: ({ playerId, nickname }) => {
+    const leaderboard = get().leaderboard
+    const exists = leaderboard.find((p) => String(p.playerId) === String(playerId))
+    if (!exists) {
+      set({ leaderboard: [...leaderboard, { playerId, nickname }] })
+    }
+  },
+
+  removePlayer: (playerId) => {
+    set((s) => ({
+      leaderboard: s.leaderboard.filter((p) => String(p.playerId) !== String(playerId)),
+    }))
+  },
 
   setQuestion: (questionData) =>
     set({ currentQuestion: questionData, myAnswer: null, status: 'SHOW_QUESTION' }),

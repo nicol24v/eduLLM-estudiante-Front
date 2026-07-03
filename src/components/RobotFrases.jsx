@@ -37,8 +37,8 @@ export default function RobotFrases({ frases }) {
     <Box
       sx={{
         position: 'fixed',
-        bottom: 24,
-        right: 24,
+        bottom: 0,
+        right: 0,
         zIndex: 1200,
         display: 'flex',
         flexDirection: 'column',

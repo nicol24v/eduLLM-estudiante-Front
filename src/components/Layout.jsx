@@ -5,8 +5,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/useAuthStore'
 import { useGameStore } from '../stores/useGameStore'
-
-const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+import { GATEWAY } from '../config'
 
 const NAV_ITEMS = [
   { label: 'Historial', path: '/history', icon: <BarChartIcon fontSize="small" />, color: '#1e40af' },

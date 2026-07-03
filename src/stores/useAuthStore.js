@@ -37,6 +37,7 @@ export const useAuthStore = create(
         nombre: state.nombre,
         apellidoPaterno: state.apellidoPaterno,
         rol: state.rol,
+        idEstudianteMateria: state.idEstudianteMateria,
       }),
     },
   ),

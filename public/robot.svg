@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Antena -->
+  <line x1="150" y1="40" x2="150" y2="20" stroke="#444" stroke-width="4"/>
+  <circle cx="150" cy="15" r="6" fill="#ff4d4d"/>
+
+  <!-- Cabeza -->
+  <rect x="60" y="50" width="180" height="170" rx="20" ry="20"
+        fill="#cfd8dc" stroke="#455a64" stroke-width="5"/>
+
+  <!-- Orejas -->
+  <rect x="40" y="105" width="20" height="60" rx="5"
+        fill="#90a4ae" stroke="#455a64" stroke-width="4"/>
+  <rect x="240" y="105" width="20" height="60" rx="5"
+        fill="#90a4ae" stroke="#455a64" stroke-width="4"/>
+
+  <!-- Ojos -->
+  <circle cx="110" cy="110" r="20" fill="#212121"/>
+  <circle cx="190" cy="110" r="20" fill="#212121"/>
+  <circle cx="110" cy="110" r="8" fill="#00e5ff"/>
+  <circle cx="190" cy="110" r="8" fill="#00e5ff"/>
+
+  <!-- Nariz -->
+  <rect x="145" y="130" width="10" height="25" rx="3"
+        fill="#78909c"/>
+
+  <!-- Boca -->
+  <rect x="95" y="170" width="110" height="30" rx="6"
+        fill="#263238" stroke="#455a64" stroke-width="3"/>
+
+  <!-- Dientes -->
+  <line x1="117" y1="170" x2="117" y2="200" stroke="#ffffff" stroke-width="2"/>
+  <line x1="139" y1="170" x2="139" y2="200" stroke="#ffffff" stroke-width="2"/>
+  <line x1="161" y1="170" x2="161" y2="200" stroke="#ffffff" stroke-width="2"/>
+  <line x1="183" y1="170" x2="183" y2="200" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- Tornillos -->
+  <circle cx="85" cy="75" r="4" fill="#455a64"/>
+  <circle cx="215" cy="75" r="4" fill="#455a64"/>
+  <circle cx="85" cy="195" r="4" fill="#455a64"/>
+  <circle cx="215" cy="195" r="4" fill="#455a64"/>
+</svg>
