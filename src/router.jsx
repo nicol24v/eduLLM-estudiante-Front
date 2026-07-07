@@ -6,8 +6,11 @@ import JoinPage from './pages/join/JoinPage'
 import GamePage from './pages/game/GamePage'
 import HistoryListPage from './pages/history/HistoryListPage'
 import HistoryDetailPage from './pages/history/HistoryDetailPage'
+import NotFoundPage from './pages/not-found/NotFoundPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
+
+const basename = import.meta.env.VITE_BASENAME || ''
 
 export const router = createBrowserRouter([
   { path: '/auth/callback', element: <AuthCallback /> },
@@ -60,4 +63,8 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-])
+  {
+    path: '*',
+    element: <NotFoundPage />,
+  },
+], { basename })

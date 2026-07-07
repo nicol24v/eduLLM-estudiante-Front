@@ -7,4 +7,9 @@ export const gameService = {
     })
     return data.data
   },
+
+  getFrases: async () => {
+    const { data } = await api.get('/api/estudiante/game/frases')
+    return data.data
+  },
 }

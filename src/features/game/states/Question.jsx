@@ -17,7 +17,7 @@ export default function Question() {
         </Typography>
         <ScoreDisplay score={score} />
       </Box>
-      <Timer totalSeconds={currentQuestion.tiempo_limite} />
+      <Timer totalSeconds={currentQuestion.cooldown ?? 5} />
       <Paper elevation={2} sx={{ p: 3, mt: 2, mb: 3, borderRadius: 3 }}>
         <QuestionMedia url={currentQuestion.image_url} />
         <Typography variant="h5" fontWeight={700} textAlign="center">

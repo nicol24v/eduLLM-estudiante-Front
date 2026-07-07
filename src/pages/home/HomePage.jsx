@@ -8,13 +8,22 @@ import { useAuthStore } from '../../stores/useAuthStore'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import { historyService } from '../../services/historyService'
+import { gameService } from '../../services/gameService'
 import ScienceBackground from '../../components/ScienceBackground'
+import RobotFrases from '../../components/RobotFrases'
 
 export default function HomePage() {
   const navigate = useNavigate()
   const nombre = useAuthStore((s) => s.nombre)
   const [stats, setStats] = useState([])
   const [loadingStats, setLoadingStats] = useState(true)
+  const [frases, setFrases] = useState([])
+
+  useEffect(() => {
+    gameService.getFrases()
+      .then((res) => setFrases(Array.isArray(res) ? res : (res?.frases ?? [])))
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     historyService.getStats()
@@ -164,6 +173,7 @@ export default function HomePage() {
           </Box>
         ) : null}
       </Box>
+      <RobotFrases frases={frases} />
     </Box>
   )
 }

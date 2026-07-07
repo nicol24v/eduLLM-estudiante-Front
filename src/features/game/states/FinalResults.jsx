@@ -4,6 +4,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useNavigate } from 'react-router-dom'
 import { useGameStore } from '../../../stores/useGameStore'
+import { GATEWAY } from '../../../config'
 
 export default function FinalResults() {
   const navigate = useNavigate()
@@ -56,7 +57,7 @@ export default function FinalResults() {
       </Stack>
 
       <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
-        <Button variant="outlined" fullWidth onClick={() => window.location.href = `http://localhost:8085/tutor?idPartidaEstudiante=${idPartidaEstudiante}`}>
+        <Button variant="outlined" fullWidth onClick={() => window.location.href = `${GATEWAY}/tutor?idPartidaEstudiante=${idPartidaEstudiante}`}>
           Hablar con tu tutor virtual
         </Button>
         <Button variant="contained" fullWidth onClick={handleHome}>

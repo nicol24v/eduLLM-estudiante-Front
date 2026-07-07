@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Box, CircularProgress, Typography } from '@mui/material'
 import axios from 'axios'
 import { useAuthStore } from '../../stores/useAuthStore'
-
-const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+import { GATEWAY } from '../../config'
 
 export default function DashboardPage() {
   const navigate = useNavigate()

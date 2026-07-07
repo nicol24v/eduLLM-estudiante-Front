@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-
-const GATEWAY = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+import { GATEWAY } from '../../config'
 
 export default function LoginPage() {
   useEffect(() => {
