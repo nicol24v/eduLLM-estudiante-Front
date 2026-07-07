@@ -118,7 +118,7 @@ export default function JoinPage() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(135deg, #1565c0 0%, #7c3aed 55%, #a855f7 100%)',
-        overflow: 'auto',
+        overflowX: 'clip',
         px: { xs: 2, sm: 3 },
         py: { xs: 3, sm: 4 },
       }}

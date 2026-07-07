@@ -10,12 +10,24 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = useAuthStore.getState().token
   if (token) config.headers.Authorization = `Bearer ${token}`
+  console.log('[API →]', config.method?.toUpperCase(), config.baseURL + config.url, {
+    hasToken: !!token,
+    tokenSnippet: token ? token.slice(0, 30) + '...' : 'ninguno',
+    params: config.params,
+  })
   return config
 })
 
 api.interceptors.response.use(
-  (res) => res,
+  (res) => {
+    console.log('[API ←]', res.status, res.config.url, res.data)
+    return res
+  },
   (err) => {
+    console.error('[API ✗]', err.response?.status, err.config?.url, {
+      responseData: err.response?.data,
+      message: err.message,
+    })
     if (err.response?.status === 401) {
       useAuthStore.getState().logout()
       window.location.href = `${GATEWAY}/login`

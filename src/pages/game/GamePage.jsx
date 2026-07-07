@@ -82,7 +82,7 @@ export default function GamePage() {
     <Box sx={{
       minHeight: '100vh',
       color,
-      fontFamily: "'Fredoka One', 'Nunito', cursive",
+      fontFamily: "'Nunito', sans-serif",
       transition: 'background 0.4s',
       ...(isQuestionState
         ? {

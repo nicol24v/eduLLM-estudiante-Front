@@ -25,7 +25,7 @@ export default function AnswerButton({ index, label, disabled, onClick, selected
         color: 'white',
         fontWeight: 700,
         fontSize: '1rem',
-        fontFamily: "'Fredoka One', 'Nunito', cursive",
+        fontFamily: "'Nunito', sans-serif",
         textShadow: '0 2px 4px rgba(0,0,0,0.35)',
         textTransform: 'none',
         p: 2,
