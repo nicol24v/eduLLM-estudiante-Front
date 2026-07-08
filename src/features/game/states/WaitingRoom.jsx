@@ -1,8 +1,11 @@
-import { Box, Typography, Chip, Divider, CircularProgress } from '@mui/material'
+import { useState } from 'react'
+import { Box, Typography, Chip, Divider, CircularProgress, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 import PeopleIcon from '@mui/icons-material/People'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 import ScienceBackground from '../../../components/ScienceBackground'
 
-export default function WaitingRoom({ players = [], code }) {
+export default function WaitingRoom({ players = [], code, onLeave }) {
+  const [confirmOpen, setConfirmOpen] = useState(false)
   return (
     <Box
       sx={{
@@ -99,8 +102,70 @@ export default function WaitingRoom({ players = [], code }) {
               />
             ))}
           </Box>
+
+          {onLeave && (
+            <Box sx={{ mt: 3, pt: 2, borderTop: '1px solid', borderColor: { xs: 'divider', md: 'rgba(255,255,255,0.15)' } }}>
+              <Button
+                onClick={() => setConfirmOpen(true)}
+                startIcon={<ExitToAppIcon />}
+                size="small"
+                sx={{
+                  color: { xs: 'text.secondary', md: 'rgba(255,255,255,0.55)' },
+                  '&:hover': {
+                    color: { xs: 'error.main', md: 'rgba(255,100,100,0.9)' },
+                    background: { xs: 'rgba(239,68,68,0.06)', md: 'rgba(239,68,68,0.1)' },
+                  },
+                  borderRadius: '10px',
+                  textTransform: 'none',
+                  fontWeight: 500,
+                  transition: 'color 0.2s, background 0.2s',
+                }}
+              >
+                Salir de la sala
+              </Button>
+            </Box>
+          )}
         </Box>
       </Box>
+
+      <Dialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        PaperProps={{
+          sx: {
+            borderRadius: '16px',
+            px: 1,
+            py: 0.5,
+            maxWidth: 360,
+          },
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: 700, fontSize: '1.1rem', pb: 1 }}>
+          ¿Salir de la sala?
+        </DialogTitle>
+        <DialogContent sx={{ pb: 1 }}>
+          <Typography variant="body2" color="text.secondary">
+            Si sales ahora perderás tu lugar en la sala de espera y tendrás que volver a ingresar el código.
+          </Typography>
+        </DialogContent>
+        <DialogActions sx={{ px: 2, pb: 2, gap: 1 }}>
+          <Button
+            onClick={() => setConfirmOpen(false)}
+            variant="outlined"
+            sx={{ borderRadius: '10px', textTransform: 'none', flex: 1 }}
+          >
+            Cancelar
+          </Button>
+          <Button
+            onClick={onLeave}
+            variant="contained"
+            color="error"
+            sx={{ borderRadius: '10px', textTransform: 'none', flex: 1 }}
+          >
+            Sí, salir
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   )
 }

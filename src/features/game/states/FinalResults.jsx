@@ -1,14 +1,45 @@
+import { useEffect } from 'react'
 import { Box, Typography, Button, Paper, Chip, Alert, Stack } from '@mui/material'
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { useNavigate } from 'react-router-dom'
+import confetti from 'canvas-confetti'
 import { useGameStore } from '../../../stores/useGameStore'
 import { GATEWAY } from '../../../config'
 
 export default function FinalResults() {
   const navigate = useNavigate()
   const { score, myPosition, answerHistory, quizTitle, idPartidaEstudiante, reset } = useGameStore()
+
+  useEffect(() => {
+    const duration = 5000
+    const animationEnd = Date.now() + duration
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1500 }
+
+    const randomInRange = (min, max) => Math.random() * (max - min) + min
+
+    const interval = setInterval(() => {
+      const timeLeft = animationEnd - Date.now()
+      if (timeLeft <= 0) {
+        clearInterval(interval)
+        return
+      }
+      const particleCount = 50 * (timeLeft / duration)
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      })
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      })
+    }, 250)
+
+    return () => clearInterval(interval)
+  }, [])
 
   const handleHome = () => {
     reset()

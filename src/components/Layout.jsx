@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material'
 import ScienceIcon from '@mui/icons-material/Science'
 import BarChartIcon from '@mui/icons-material/BarChart'
+import GradeIcon from '@mui/icons-material/Grade'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/useAuthStore'
@@ -9,7 +10,7 @@ import { GATEWAY } from '../config'
 
 const NAV_ITEMS = [
   { label: 'Historial', path: '/history', icon: <BarChartIcon fontSize="small" />, color: '#1e40af' },
-  // Para añadir más ítems: { label: 'Nombre', path: '/ruta', icon: <Icon />, color: '#6d28d9' }
+  { label: 'Calificaciones', path: '/grades', icon: <GradeIcon fontSize="small" />, color: '#6d28d9' },
 ]
 
 export default function Layout({ children }) {

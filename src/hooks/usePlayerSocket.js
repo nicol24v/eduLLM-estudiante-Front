@@ -9,6 +9,7 @@ export function usePlayerSocket(codigoAcceso) {
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
   const socketRef = useRef(null)
+  const intentionalLeave = useRef(false)
 
   const { token, idEstudianteMateria, nombre, apellidoPaterno } = useAuthStore()
   const {
@@ -113,7 +114,9 @@ export function usePlayerSocket(codigoAcceso) {
     })
 
     socket.on('disconnect', () => {
-      enqueueSnackbar('Conexión perdida. Reconectando...', { variant: 'info' })
+      if (!intentionalLeave.current) {
+        enqueueSnackbar('Conexión perdida. Reconectando...', { variant: 'info' })
+      }
     })
 
     return () => {
@@ -137,6 +140,7 @@ export function usePlayerSocket(codigoAcceso) {
   }, [codigoAcceso, idEstudianteMateria, submitAnswer])
 
   const leaveRoom = useCallback(() => {
+    intentionalLeave.current = true
     socketRef.current?.emit('player:leave')
     reset()
     navigate('/join', { replace: true })

@@ -75,9 +75,6 @@ export default function ScienceBackground() {
         <ellipse cx="150" cy="150" rx="120" ry="45" fill="none" stroke="white" strokeWidth="2" opacity="0.7" />
         <ellipse cx="150" cy="150" rx="120" ry="45" fill="none" stroke="white" strokeWidth="2" opacity="0.7" transform="rotate(60 150 150)" />
         <ellipse cx="150" cy="150" rx="120" ry="45" fill="none" stroke="white" strokeWidth="2" opacity="0.7" transform="rotate(120 150 150)" />
-        <circle cx="270" cy="150" r="5" fill="#a855f7" />
-        <circle cx="90" cy="97" r="5" fill="#7c3aed" />
-        <circle cx="90" cy="203" r="5" fill="#a855f7" />
       </Box>
     </Box>
   )

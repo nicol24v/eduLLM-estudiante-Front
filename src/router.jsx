@@ -6,6 +6,7 @@ import JoinPage from './pages/join/JoinPage'
 import GamePage from './pages/game/GamePage'
 import HistoryListPage from './pages/history/HistoryListPage'
 import HistoryDetailPage from './pages/history/HistoryDetailPage'
+import GradesPage from './pages/grades/GradesPage'
 import NotFoundPage from './pages/not-found/NotFoundPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
@@ -59,6 +60,16 @@ export const router = createBrowserRouter([
       <ProtectedRoute>
         <Layout>
           <HistoryDetailPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/grades',
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <GradesPage />
         </Layout>
       </ProtectedRoute>
     ),
