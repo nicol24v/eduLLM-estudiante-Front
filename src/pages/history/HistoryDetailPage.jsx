@@ -18,7 +18,7 @@ export default function HistoryDetailPage() {
   useEffect(() => {
     historyService.getDetail(id)
       .then(setDetalle)
-      .catch(() => navigate('/history', { replace: true }))
+      .catch(() => navigate('/grades', { replace: true }))
       .finally(() => setLoading(false))
   }, [id])
 
@@ -35,10 +35,10 @@ export default function HistoryDetailPage() {
     <Box sx={{ p: 3, maxWidth: 700, mx: 'auto' }}>
       <Button
         startIcon={<ArrowBackIcon />}
-        onClick={() => navigate(`/history${materiaId ? `?materiaId=${materiaId}` : ''}`)}
+        onClick={() => navigate(`/grades${materiaId ? `?materiaId=${materiaId}` : ''}`)}
         sx={{ mb: 2 }}
       >
-        Volver al historial
+        Volver a calificaciones
       </Button>
 
       <Typography variant="h5" fontWeight={700} mb={0.5}>{titulo}</Typography>

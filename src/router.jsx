@@ -4,7 +4,6 @@ import DashboardPage from './pages/dashboard/DashboardPage'
 import HomePage from './pages/home/HomePage'
 import JoinPage from './pages/join/JoinPage'
 import GamePage from './pages/game/GamePage'
-import HistoryListPage from './pages/history/HistoryListPage'
 import HistoryDetailPage from './pages/history/HistoryDetailPage'
 import GradesPage from './pages/grades/GradesPage'
 import NotFoundPage from './pages/not-found/NotFoundPage'
@@ -45,31 +44,21 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: '/history',
-    element: (
-      <ProtectedRoute>
-        <Layout>
-          <HistoryListPage />
-        </Layout>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: '/history/:id',
-    element: (
-      <ProtectedRoute>
-        <Layout>
-          <HistoryDetailPage />
-        </Layout>
-      </ProtectedRoute>
-    ),
-  },
-  {
     path: '/grades',
     element: (
       <ProtectedRoute>
         <Layout>
           <GradesPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/grades/:id',
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <HistoryDetailPage />
         </Layout>
       </ProtectedRoute>
     ),

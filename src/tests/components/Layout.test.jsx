@@ -16,9 +16,14 @@ describe('Layout navbar', () => {
     expect(screen.getByText('EduQuiz')).toBeInTheDocument()
   })
 
-  it('renders Historial pill button', () => {
+  it('renders Calificaciones pill button', () => {
     render(<Layout><div /></Layout>)
-    expect(screen.getByText('Historial')).toBeInTheDocument()
+    expect(screen.getByText('Calificaciones')).toBeInTheDocument()
+  })
+
+  it('does not render Historial pill button', () => {
+    render(<Layout><div /></Layout>)
+    expect(screen.queryByText('Historial')).not.toBeInTheDocument()
   })
 
   it('renders logout button', () => {
