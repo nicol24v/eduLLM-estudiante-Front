@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   Box, Typography, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Paper,
-  CircularProgress, Alert, Chip,
+  CircularProgress, Alert, Chip, IconButton, Tooltip,
 } from '@mui/material'
 import GradeIcon from '@mui/icons-material/Grade'
+import VisibilityIcon from '@mui/icons-material/Visibility'
 import { historyService } from '../../services/historyService'
 import { useAuthStore } from '../../stores/useAuthStore'
 
@@ -20,6 +22,9 @@ function notaColor(nota) {
 }
 
 export default function GradesPage() {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const materiaId = searchParams.get('materiaId')
   const nombre = useAuthStore((s) => s.nombre)
   const apellidoPaterno = useAuthStore((s) => s.apellidoPaterno)
   const [loading, setLoading] = useState(true)
@@ -27,37 +32,27 @@ export default function GradesPage() {
   const [quizzes, setQuizzes] = useState([])
 
   useEffect(() => {
-    historyService.getList()
+    historyService.getList(materiaId)
       .then((historial) => {
-        const map = new Map()
-
-        historial.forEach((p) => {
-          const prueba = p.tbl_t_partida?.tbl_t_prueba
-          const key = prueba?.id_prueba ?? prueba?.titulo ?? 'sin-nombre'
-          const titulo = prueba?.titulo ?? 'Cuestionario'
-          const total = prueba?._count?.tbl_t_pregunta ?? 0
-          const correctas = p.respuestas_correctas ?? 0
-          const nota = calcNota(correctas, total)
-          const fecha = p.fecha_creacion
-
-          if (!map.has(key)) {
-            map.set(key, { titulo, nota, correctas, total, fecha })
-          } else {
-            const existing = map.get(key)
-            if (nota > existing.nota) {
-              map.set(key, { titulo, nota, correctas, total, fecha })
+        const list = historial
+          .map((p) => {
+            const prueba = p.tbl_t_partida?.tbl_t_prueba
+            const total = prueba?._count?.tbl_t_pregunta ?? 0
+            const correctas = p.respuestas_correctas ?? 0
+            return {
+              id: p.id_partida_estudiante,
+              titulo: prueba?.titulo ?? 'Cuestionario',
+              nota: calcNota(correctas, total),
+              fecha: p.fecha_creacion,
+              revisionDisponible: p.revision_disponible ?? false,
             }
-          }
-        })
-
-        const list = Array.from(map.values()).sort(
-          (a, b) => new Date(b.fecha) - new Date(a.fecha)
-        )
+          })
+          .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
         setQuizzes(list)
       })
       .catch(() => setError('No se pudo cargar las calificaciones.'))
       .finally(() => setLoading(false))
-  }, [])
+  }, [materiaId])
 
   const promedio = quizzes.length
     ? Math.round((quizzes.reduce((acc, q) => acc + q.nota, 0) / quizzes.length) * 10) / 10
@@ -105,12 +100,15 @@ export default function GradesPage() {
                   <TableCell sx={{ fontWeight: 700, bgcolor: 'primary.main', color: 'white' }} align="center">
                     Nota
                   </TableCell>
+                  <TableCell sx={{ fontWeight: 700, bgcolor: 'primary.main', color: 'white' }} align="center">
+                    Revisión
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {quizzes.map((q, i) => (
+                {quizzes.map((q) => (
                   <TableRow
-                    key={i}
+                    key={q.id}
                     sx={{ '&:last-child td': { border: 0 }, '&:hover': { bgcolor: 'action.hover' } }}
                   >
                     <TableCell sx={{ fontWeight: 500 }}>{q.titulo}</TableCell>
@@ -126,6 +124,20 @@ export default function GradesPage() {
                         size="small"
                         sx={{ fontWeight: 700, minWidth: 72 }}
                       />
+                    </TableCell>
+                    <TableCell align="center">
+                      <Tooltip title={q.revisionDisponible ? 'Ver revisión' : 'Revisión no habilitada por el docente'}>
+                        <span>
+                          <IconButton
+                            size="small"
+                            disabled={!q.revisionDisponible}
+                            onClick={() => navigate(`/grades/${q.id}`)}
+                            aria-label="Ver revisión"
+                          >
+                            <VisibilityIcon fontSize="small" />
+                          </IconButton>
+                        </span>
+                      </Tooltip>
                     </TableCell>
                   </TableRow>
                 ))}
