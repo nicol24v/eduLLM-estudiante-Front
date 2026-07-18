@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { historyService } from '../../services/historyService'
 import HomePage from '../../pages/home/HomePage'
 
-vi.mock('react-router-dom', () => ({ useNavigate: () => vi.fn() }))
+const mockNavigate = vi.fn()
+vi.mock('react-router-dom', () => ({ useNavigate: () => mockNavigate }))
 vi.mock('../../stores/useAuthStore', () => ({
   useAuthStore: (selector) => selector({ nombre: 'Ana' }),
 }))
@@ -16,6 +17,7 @@ vi.mock('../../components/ScienceBackground', () => ({
 
 describe('HomePage', () => {
   beforeEach(() => {
+    mockNavigate.mockClear()
     historyService.getStats.mockResolvedValue([])
   })
 
@@ -50,5 +52,18 @@ describe('HomePage', () => {
     render(<HomePage />)
     await screen.findByText('Unirse a sala')
     expect(screen.queryByText('Mi promedio por materia')).not.toBeInTheDocument()
+  })
+
+  it('navigates to /grades with materiaId when a subject card is clicked', async () => {
+    historyService.getStats.mockResolvedValueOnce([{
+      id_estudiante_materia: 1,
+      promedio_puntaje: 85,
+      total_partidas: 3,
+      materia: { id_materia: 1, nombre: 'Biología' },
+    }])
+    render(<HomePage />)
+    const card = await screen.findByText('Biología')
+    fireEvent.click(card)
+    expect(mockNavigate).toHaveBeenCalledWith('/grades?materiaId=1')
   })
 })

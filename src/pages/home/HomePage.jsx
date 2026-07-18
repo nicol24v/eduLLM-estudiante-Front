@@ -135,7 +135,7 @@ export default function HomePage() {
                       '&:hover': { transform: 'translateY(-2px)' },
                     }}
                   >
-                    <CardActionArea onClick={() => navigate(`/history?materiaId=${s.materia.id_materia}`)}>
+                    <CardActionArea onClick={() => navigate(`/grades?materiaId=${s.materia.id_materia}`)}>
                       <CardContent>
                         <Typography
                           variant="body2"
