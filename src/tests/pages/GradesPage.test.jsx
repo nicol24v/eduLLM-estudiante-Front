@@ -24,7 +24,6 @@ function partida(overrides) {
     tbl_t_partida: {
       tbl_t_prueba: { id_prueba: 10, titulo: 'La célula', _count: { tbl_t_pregunta: 10 } },
     },
-    revision_disponible: false,
     ...overrides,
   }
 }
@@ -52,24 +51,15 @@ describe('GradesPage', () => {
     expect(historyService.getList).toHaveBeenCalledWith('7')
   })
 
-  it('shows an enabled revision button that navigates to /grades/:id when revision_disponible is true', async () => {
+  it('shows a revision button that always navigates to /grades/:id', async () => {
     historyService.getList.mockResolvedValueOnce([
-      partida({ id_partida_estudiante: 3, revision_disponible: true }),
+      partida({ id_partida_estudiante: 3 }),
     ])
     render(<GradesPage />)
     const button = await screen.findByRole('button', { name: 'Ver revisión' })
     expect(button).not.toBeDisabled()
     fireEvent.click(button)
     expect(mockNavigate).toHaveBeenCalledWith('/grades/3')
-  })
-
-  it('shows a disabled revision button when revision_disponible is false or missing', async () => {
-    historyService.getList.mockResolvedValueOnce([
-      partida({ id_partida_estudiante: 4, revision_disponible: false }),
-    ])
-    render(<GradesPage />)
-    const button = await screen.findByRole('button', { name: 'Ver revisión' })
-    expect(button).toBeDisabled()
   })
 
   it('averages the score across all attempts shown, not just the best per quiz', async () => {

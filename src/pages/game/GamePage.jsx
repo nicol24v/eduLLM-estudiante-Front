@@ -1,4 +1,5 @@
 import fondoCuest from '../../assets/fondo-cuest.jpg'
+import fondoTablaPosiciones from '../../assets/fondo-tabladeposiciones.jpg'
 import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Container } from '@mui/material'
@@ -54,6 +55,7 @@ export default function GamePage() {
   const bg = STATE_BG[status] || '#f5f5f5'
   const color = STATE_COLOR[status] || 'inherit'
   const isQuestionState = status === 'SHOW_QUESTION' || status === 'SELECT_ANSWER'
+  const isLeaderboardState = status === 'SHOW_LEADERBOARD'
 
   const renderState = () => {
     switch (status) {
@@ -87,6 +89,13 @@ export default function GamePage() {
       ...(isQuestionState
         ? {
             background: `linear-gradient(rgba(10,10,30,0.60), rgba(10,10,30,0.60)), url(${fondoCuest})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+          }
+        : isLeaderboardState
+        ? {
+            background: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${fondoTablaPosiciones})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',

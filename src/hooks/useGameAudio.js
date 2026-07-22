@@ -10,6 +10,8 @@ const SFX = {
   first: '/sounds/first.mp3',
   second: '/sounds/second.mp3',
   third: '/sounds/three.mp3',
+  correct: '/sounds/correct.mp3',
+  wrong: '/sounds/wrong-answer.mp3',
 }
 
 export function useGameAudio(status, isCorrect, myPosition) {
@@ -40,7 +42,7 @@ export function useGameAudio(status, isCorrect, myPosition) {
 
   useEffect(() => {
     if (status === 'POST_ANSWER') {
-      play(isCorrect ? 'boump' : 'answersSound')
+      play(isCorrect ? 'correct' : 'wrong')
     }
   }, [status, isCorrect])
 

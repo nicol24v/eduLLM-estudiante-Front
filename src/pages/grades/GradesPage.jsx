@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   Box, Typography, Table, TableBody, TableCell,
   TableContainer, TableHead, TableRow, Paper,
-  CircularProgress, Alert, Chip, IconButton, Tooltip,
+  CircularProgress, Alert, Chip, IconButton,
 } from '@mui/material'
 import GradeIcon from '@mui/icons-material/Grade'
 import VisibilityIcon from '@mui/icons-material/Visibility'
@@ -44,7 +44,6 @@ export default function GradesPage() {
               titulo: prueba?.titulo ?? 'Cuestionario',
               nota: calcNota(correctas, total),
               fecha: p.fecha_creacion,
-              revisionDisponible: p.revision_disponible ?? false,
             }
           })
           .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
@@ -126,18 +125,13 @@ export default function GradesPage() {
                       />
                     </TableCell>
                     <TableCell align="center">
-                      <Tooltip title={q.revisionDisponible ? 'Ver revisión' : 'Revisión no habilitada por el docente'}>
-                        <span>
-                          <IconButton
-                            size="small"
-                            disabled={!q.revisionDisponible}
-                            onClick={() => navigate(`/grades/${q.id}`)}
-                            aria-label="Ver revisión"
-                          >
-                            <VisibilityIcon fontSize="small" />
-                          </IconButton>
-                        </span>
-                      </Tooltip>
+                      <IconButton
+                        size="small"
+                        onClick={() => navigate(`/grades/${q.id}`)}
+                        aria-label="Ver revisión"
+                      >
+                        <VisibilityIcon fontSize="small" />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
